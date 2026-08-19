@@ -60,7 +60,7 @@ def clean_data(df):
     price_na_before = df["单价(元)"].isna().sum()
     report["单价原本缺失"] = price_na_before
 
-    df["数量"] = df["数量"].astype(str).str.extract(r'(\d+)')[0]
+    df["数量"] = df["数量"].astype(str).str.extract(r'(\d+)')[0]#取 [0] 变成普通 Series，否则是一个DF
     df["数量"] = pd.to_numeric(df["数量"], errors="coerce")
     df["单价(元)"] = df["单价(元)"].astype(str).str.extract(r'(\d+)')[0]
     df["单价(元)"] = pd.to_numeric(df["单价(元)"], errors="coerce")

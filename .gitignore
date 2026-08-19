@@ -1,0 +1,25 @@
+# 密钥配置文件，禁止上传
+.env
+
+# 程序输出产物：报告、表格
+output/
+*.xlsx
+*.csv
+*.md
+
+# python缓存
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 日志文件
+*.log
+
+# vscode本地编辑器配置
+.vscode/
+
+# vim临时文件
+*.swp
+*.swo
+
