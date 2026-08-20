@@ -57,7 +57,7 @@ python main.py --input ./data/实习练习‑销售脏数据.csv --output ./outp
 
 程序执行完毕，清洗后的 Excel、md 报告全部生成在 `output` 文件夹。
 
-## 项目目录结构（和你截图一一对应）
+
 
 ```
 DATA‑REPORT‑TOOL/

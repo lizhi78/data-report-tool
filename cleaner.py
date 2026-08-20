@@ -60,10 +60,18 @@ def clean_data(df):
     price_na_before = df["单价(元)"].isna().sum()
     report["单价原本缺失"] = price_na_before
 
+
+     #将数字之间的逗号、空格、货币符号去掉，方便后续转换成数值类型（如"1,000" → "1000"，"¥ 100" → "100"）,否则.str.extract(r'(\d+)')[0]会出现问题1，999会直接被转换成1
+    df["数量"] = df["数量"].astype(str).str.replace(r'[,\s¥$]', '', regex=True)
+    df["单价(元)"] = df["单价(元)"].astype(str).str.replace(r'[,\s¥$]', '', regex=True)
+    df["单价(元)"] = df["单价(元)"].str.extract(r'(\d+\.?\d*)')[0]#使得单价(元)列可以提取小数点后的数字，避免被截断(虽然实际上并没有)
+
     df["数量"] = df["数量"].astype(str).str.extract(r'(\d+)')[0]#取 [0] 变成普通 Series，否则是一个DF
     df["数量"] = pd.to_numeric(df["数量"], errors="coerce")
     df["单价(元)"] = df["单价(元)"].astype(str).str.extract(r'(\d+)')[0]
     df["单价(元)"] = pd.to_numeric(df["单价(元)"], errors="coerce")
+
+
 
     # 提取后新产生的空值 = 提取失败
     report["数量提取失败"] = df["数量"].isna().sum() - qty_na_before#to_numeric转换后空值的部分减去转换前的空值部分，说明提取失败

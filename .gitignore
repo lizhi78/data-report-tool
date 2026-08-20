@@ -1,3 +1,5 @@
+﻿# 用 PowerShell 执行（你截图里用的是 PowerShell）
+@"
 # 密钥配置文件，禁止上传
 .env
 
@@ -22,4 +24,3 @@ __pycache__/
 # vim临时文件
 *.swp
 *.swo
-
