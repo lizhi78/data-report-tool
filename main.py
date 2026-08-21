@@ -13,16 +13,16 @@ import exporter
 
 # ---------- 第0步：读取命令行参数 ----------
 parser = argparse.ArgumentParser(description="数据清洗流水线")
-parser.add_argument("--input", "-i", required=True, help="输入文件路径")
-parser.add_argument("--output", "-o", required=True, help="输出目录路径")
+parser.add_argument("--input", "-i", required=True, help="输入文件路径")#-i 就只是 --input 的简写
+parser.add_argument("--output", "-o", required=True, help="输出目录路径")#-o 就只是 --output 的简写
 
-args = parser.parse_args()
+args = parser.parse_args()#读取你终端敲的一整行命令,把`‑i`后面的值拿出来，存到`args.input`,把`‑o`后面的值拿出来，存到`args.output`
 input_path = args.input
 output_dir = args.output
 
-if not os.path.isfile(input_path):
+if not os.path.isfile(input_path):#判断这个路径，是不是**真实存在的文件**。
     print(f"错误：找不到文件 {input_path}")
-    sys.exit(1)
+    sys.exit(1)#立刻终止整个 Python 程序。
 
 os.makedirs(output_dir, exist_ok=True)
 
