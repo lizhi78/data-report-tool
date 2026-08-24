@@ -49,31 +49,41 @@ python main.py --input 你的数据文件.csv --output ./output
 - `--input`：必填，原始脏数据路径，支持`.csv`、`.xlsx`
 - `--output`：必填，输出文件存放目录，本项目默认使用`./output`
 
-示例
+示例(如何使用)
 
 ```
-python main.py --input ./data/实习练习‑销售脏数据.csv --output ./output
+python 流水线数据清洗/main.py -i ./流水线数据清洗/实习练习-销售脏数据.csv -o ./output/
 ```
+输出结果示例：[text(markdown)](../output/汇总_实习练习-销售脏数据.md)
+[text(excel)](../output/汇总_实习练习-销售脏数据.xlsx)
+
+
 
 程序执行完毕，清洗后的 Excel、md 报告全部生成在 `output` 文件夹。
 
 
-
+## 每一步干了什么
 ```
 DATA‑REPORT‑TOOL/
 ├── output/            # 程序输出：清洗excel、md报告
 ├── .env               # API密钥配置，不上传git
 ├── .gitignore         # git忽略规则配置
-├── ai_report.py       # F6：调用大模型，生成AI分析文本
-├── analyzer.py        # F4 F5：统计计算、异常识别标记
-├── cleaner.py         # F2 F3：数据清洗逻辑、清洗日志
+├── ai_report.py       # F6：调用 DeepSeek，基于统计数据输出文字分析
+├── analyzer.py        # F4 F5：按类别、地区、销售员、月份做销售额汇总；异常识别标记，数量、单价不合理时标记 “异常”
+├── cleaner.py         # F2 F3：去除全空行、重复行；清洗日期；提取数量、单价数值，缺失填充 0
 ├── config.py          # 读取环境变量、全局配置
-├── exporter.py        # F7 F8：导出Excel、Markdown报告
+├── exporter.py        # F7 F8：导出多 sheet 的 Excel 文件 + Markdown 可读报告
 ├── loader.py          # F1：读取csv、excel原始数据
 ├── main.py            # 程序入口，命令行解析，调度各个模块
 ├── README.md          # 项目说明文档（本文件）
 └── requirements.txt   # 第三方库依赖清单
 ```
+
+
+
+
+
+
 
 ## 异常数据判定标准
 
