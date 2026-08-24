@@ -7,7 +7,7 @@
 output/
 *.xlsx
 *.csv
-*.md
+output/*.md
 
 # python缓存
 __pycache__/
