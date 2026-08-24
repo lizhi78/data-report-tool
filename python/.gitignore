@@ -1,0 +1,6 @@
+# 密钥配置文件，禁止上传
+.env
+# python缓存文件
+__pycache__/
+*.pyc
+*.log
