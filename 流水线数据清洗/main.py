@@ -12,21 +12,22 @@ import exporter
 
 
 # ---------- 第0步：读取命令行参数 ----------
-parser = argparse.ArgumentParser(description="数据清洗流水线")
-parser.add_argument("--input", "-i", required=True, help="输入文件路径")#-i 就只是 --input 的简写
+parser = argparse.ArgumentParser(description="数据清洗流水线")#创建命令行参数解释器
+#传入两个参数
+parser.add_argument("--input", "-i", required=True, help="输入文件路径")#-i 就只是 --input 的简写,required=True表示这个参数代表的值是必须要有的，如果你不写这个参数，程序就会报错。help="输入文件路径" 这个参数的作用是，当你在终端敲 python main.py -h 时，会显示这个参数的作用说明。
 parser.add_argument("--output", "-o", required=True, help="输出目录路径")#-o 就只是 --output 的简写
 
-args = parser.parse_args()#读取你终端敲的一整行命令,把`‑i`后面的值拿出来，存到`args.input`,把`‑o`后面的值拿出来，存到`args.output`
+args = parser.parse_args()#把用户输入的命令拆解，打包进 args；读取你终端敲的一整行命令,把`‑i`后面的值拿出来，存到`args.input`,把`‑o`后面的值拿出来，存到`args.output`；
 input_path = args.input
 output_dir = args.output
 
-if not os.path.isfile(input_path):#判断这个路径，是不是**真实存在的文件**。
+if not os.path.isfile(input_path):#判断这个路径，是不是真实存在的文件。
     print(f"错误：找不到文件 {input_path}")
-    sys.exit(1)#立刻终止整个 Python 程序。
+    sys.exit(1)#如果找不到，立刻终止整个 Python 程序。
 
-os.makedirs(output_dir, exist_ok=True)
+os.makedirs(output_dir, exist_ok=True)#os.makedirs创建文件夹, exist_ok=True表示如果文件夹已经存在，就不报错，继续往下执行。
 
-
+#步骤1到4就是流水线清洗数据的过程，不断调用我已经写好的.py文件对数据进行加工
 # ---------- 第1步：加载数据 ----------
 print(">>> 正在加载数据...")
 df = load_data(input_path)
@@ -36,7 +37,7 @@ print_preview(df)
 
 # ---------- 第2步：清洗数据 ----------
 print(">>> 正在清洗数据...")
-df_cleaned, report = clean_data(df)
+df_cleaned, report = clean_data(df)#返回的是清洗好的df(日期统一，数量，单价(元)和销售额转换成Float类型)和清洗报告report
 print("清洗完成")
 
 
