@@ -67,8 +67,13 @@ r = ai_report.chat_with_ai(
 if r["status"]:                                    # 如果调用成功
     ai_analysis = r["data"].get("analysis", "无内容")  # 从 data 里取 analysis，没有就写"无内容"
 else:                                              # 如果调用失败
-    ai_analysis = r["msg"]                          # 把错误信息（如"请求超时"）当作分析文字
-print("AI分析完成" if r["status"] else ai_analysis)
+    ai_analysis = r["msg"]                         # 把错误信息（如"请求超时"）当作分析文字
+
+#调用成功只打印"AI分析完成"，后续会将调用结果保存在markdown文件中
+if r["status"]:        # AI 调用成功了
+    print("AI分析完成")       # 屏幕上显示：AI分析完成
+else:                          # AI 调用失败了
+    print(ai_analysis)         # 屏幕上显示错误原因，比如：请求超时
 
 
 # ---------- 第6步：保存结果 ----------
